@@ -1,0 +1,39 @@
+**PHASE 1 — Foundation**
+
+1. 🌱 What is Jetpack Compose?
+ - Jetpack Compose is a declarative UI framework.
+ - Instead of writing XML layouts, you describe the UI in Kotlin code.
+ - It automatically updates the UI when the data changes (reactive programming).
+
+In XML:
+
+<TextView
+    android:text="Hello World"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"/>
+
+In Compose:
+
+@Composable
+fun Greeting() {
+    Text(text = "Hello World")
+}
+
+ - @Composable - Tells the compiler that this function is for UI.
+ - Composables can call other composables.
+
+**Modifier**
+ - Used to customize composables → size, padding, background, click, shape, etc.
+ - Example:
+ Text(
+     text = "Nirbhay",
+     modifier = Modifier
+         .padding(16.dp)
+         .background(Color.Yellow)
+         .fillMaxWidth()
+         .clickable { Log.d("TAG", "Text clicked!") }
+ )
+
+ ** Modifier.fillMaxSize()
+  - It tells the Composable to expand and take up all the available space of its parent (both width and height).
+  - Just like match_parent in xml on both height and width
