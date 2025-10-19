@@ -37,3 +37,35 @@ fun Greeting() {
  ** Modifier.fillMaxSize()
   - It tells the Composable to expand and take up all the available space of its parent (both width and height).
   - Just like match_parent in xml on both height and width
+
+// setContent {}
+/*
+ ~What you can put inside setContent~
+
+* You can directly put a single composable:
+
+setContent {
+    Text("Hello")
+}
+
+
+* Or build a complete UI tree:
+
+setContent {
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+        Text("Hello")
+        Button(onClick = {}) { Text("Click Me") }
+    }
+}
+
+* Or call your own composable:
+
+setContent {
+    MyAppUI()
+}
+
+*/

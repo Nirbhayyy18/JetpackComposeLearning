@@ -13,9 +13,12 @@ import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.*
@@ -89,6 +92,28 @@ fun text2() {
     )
 }
 
+@Composable
+fun text3()
+{
+    Text(
+        text = "Hello Nirbhay",
+        color = Color.Blue,
+        modifier = Modifier.fillMaxSize(),
+        textAlign = TextAlign.Center,
+        fontStyle = FontStyle.Italic,
+        fontSize = 30.sp,
+        fontFamily = FontFamily.Cursive,
+        textDecoration = TextDecoration.combine(
+            listOf(
+                TextDecoration.Underline,
+                TextDecoration.LineThrough
+            )
+        ),
+
+    )
+}
+
+
 //
 @Preview(showSystemUi = true)
 @Composable
@@ -96,5 +121,6 @@ fun TextPreview()
 {
     //  text("Nirbhay")
     //  MultipleColor()
-        text2()
+       // text2()
+    text3()
 }
