@@ -1,4 +1,4 @@
-package com.example.jetpackcomposecourse.State_and_Recomposition
+package com.example.jetpackcomposecourse.D_State_and_Recomposition
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -23,11 +23,14 @@ import androidx.compose.ui.unit.sp
  - Recomposition is the process of updating the UI when the data changes.
  - It is triggered when the data changes.
 
- - 'remember' tells Compose to remember a value even after recomposition happens.
+* 'by' Keyword (Kotlin property delegate)
+ - Allows direct read/write of text instead of text.value
+
+* 'remember' tells Compose to remember a value even after recomposition happens.
         Without remember, the value of count would go back to 0 every time the UI redraws.
         That means — if you clicked 5 times, it would still show 0 after recomposition 😅
 
- - 'mutableStateOf(0)' :
+* 'mutableStateOf(0)' :
      👉 It’s like saying:
         “Hey Compose, I have a number (0).
         If I change this number later, you should automatically update the UI where it’s used.”
@@ -35,7 +38,6 @@ import androidx.compose.ui.unit.sp
         🎯 Why:
         In normal variables, if the value changes, UI doesn’t update automatically.
         With mutableStateOf, Compose listens 👂 to it.
-
 
 
  */

@@ -1,0 +1,188 @@
+🌱 1️⃣ What is “State” in Compose?
+
+👉 State = Data that can change over time
+…and when it changes, the UI automatically updates (recomposes).
+
+Example:
+
+var count by remember { mutableStateOf(0) }
+
+
+Here, count is a state variable — when it changes, Compose redraws the screen.
+
+So:
+
+State = the “memory” of your UI.
+
+🧩 2️⃣ What is a Stateful Composable?
+
+A Stateful composable = a composable function that owns and manages its own state inside it.
+
+Example:
+@Composable
+fun CounterExample() {
+    var count by remember { mutableStateOf(0) }  // State is INSIDE
+    Button(onClick = { count++ }) {
+        Text("Count: $count")
+    }
+}
+
+💬 Meaning:
+
+count is remembered inside this function.
+
+When you click the button → count increases → Compose rebuilds the UI → the Text updates.
+
+✅ Simple. Works perfectly fine for small apps.
+
+🧠 But… Problem?
+
+What if you want to reuse this CounterExample() somewhere else
+but manage its value from outside (like from parent screen)?
+
+You can’t — because its state is trapped inside (not reusable).
+That’s why we use the concept called 👇
+
+🏗️ 3️⃣ State Hoisting
+
+State Hoisting = Moving (lifting) the state up from a child composable to its parent composable.
+
+Why?
+
+To make your composable reusable and testable.
+
+To let parent control the state, instead of child controlling it.
+
+🔹 “Hoisting” literally means “lifting up”.
+
+Like in real life:
+
+If a child can’t carry a heavy bag, the parent lifts (hoists) it.
+
+Same idea here:
+
+Child Composable: Should display the UI and take actions (but not store data permanently).
+
+Parent Composable: Should hold the actual state.
+
+⚙️ Example 1 — Stateful Version
+@Composable
+fun CounterStateful() {
+    var count by remember { mutableStateOf(0) } // inside child
+    CounterDisplay(count = count, onIncrement = { count++ })
+}
+
+@Composable
+fun CounterDisplay(count: Int, onIncrement: () -> Unit) {
+    Button(onClick = onIncrement) {
+        Text("Clicked $count times")
+    }
+}
+
+
+✅ Works, but state is inside CounterStateful().
+
+⚙️ Example 2 — Stateless (State Hoisted) Version
+
+Now, let’s move (hoist) the state outside 👇
+
+@Composable
+fun CounterStateless(count: Int, onIncrement: () -> Unit) {
+    Button(onClick = onIncrement) {
+        Text("Clicked $count times")
+    }
+}
+
+@Composable
+fun CounterHost() { // parent
+    var count by remember { mutableStateOf(0) } // state here (lifted)
+    CounterStateless(
+        count = count,
+        onIncrement = { count++ } // pass callback
+    )
+}
+
+💬 Meaning:
+
+CounterStateless() just shows the UI.
+
+CounterHost() holds and manages the state.
+
+We hoisted the state from child → parent.
+
+🔁 4️⃣ Difference Summary
+Concept	Meaning	State Location	Reusability
+Stateful Composable	Composable that manages its own state	Inside the composable	Low
+Stateless Composable	Composable that receives state & actions from outside	In parent	High
+State Hoisting	Moving state from child → parent	In parent composable	Improves flexibility & control
+🧩 5️⃣ Why State Hoisting is Important?
+Reason	Description
+✅ Reusability	You can use the same UI with different data.
+🧪 Testability	Easier to test since logic & UI are separate.
+🔄 Single Source of Truth	One place controls data, avoids confusion.
+🧱 Clean Architecture	UI (stateless) and logic (state) are clearly divided.
+⚙️ 6️⃣ Real-Life Analogy
+
+Imagine:
+
+You built a light bulb composable.
+
+It has a button to turn on/off.
+
+If the bulb itself remembers the state (Stateful), you can’t control it from outside.
+
+But if the bulb just shows its state (on/off) and takes commands (like “toggle”),
+then someone else (the switch board = parent) can control it.
+
+That’s state hoisting — parent controlling the state, child just reacting.
+
+🧩 7️⃣ How to Convert Stateful → Stateless (Step-by-Step)
+
+Let’s convert your component manually:
+
+Step	What to Do	Example
+1️⃣	Identify the state inside composable	var text by remember { mutableStateOf("") }
+2️⃣	Move it to parent	Put same line in parent composable
+3️⃣	Pass value as parameter	TextField(value = text, ...)
+4️⃣	Pass callback to modify state	onValueChange = { text = it }
+5️⃣	Remove state from child	No remember inside child
+
+✅ Done — now your child is stateless!
+
+📘 Quick Example: TextField Hoisting
+
+Before (Stateful):
+
+@Composable
+fun NameInput() {
+    var name by remember { mutableStateOf("") }
+    TextField(value = name, onValueChange = { name = it })
+}
+
+
+After (Stateless with Hoisting):
+
+@Composable
+fun NameInput(value: String, onValueChange: (String) -> Unit) {
+    TextField(value = value, onValueChange = onValueChange)
+}
+
+@Composable
+fun NameScreen() {
+    var name by remember { mutableStateOf("") }
+    NameInput(value = name, onValueChange = { name = it })
+}
+
+
+Now, NameInput() is fully stateless and reusable in multiple places ✅
+
+💡 Easy Formula to Remember
+STATEFUL = owns the state (remember {...})
+STATELESS = uses the state (value, onChange)
+STATE HOISTING = move state to parent (lift it up)
+
+🎯 In short (Never forget summary):
+Term	What it means	Example summary
+Stateful	Composable controls its own state	remember { mutableStateOf(...) } inside composable
+Stateless	Composable gets state + callback from parent	value and onValueChange passed as parameters
+State Hoisting	Moving state up to parent for control	Parent holds state, child shows UI

@@ -1,0 +1,102 @@
+🔥 RULE 1 — “If UI can change → it MUST come from state.”
+
+    Examples:
+
+    Text that updates
+    Checkbox
+    Switch
+    Slider
+    Selected item
+    Login input
+    Dark/light theme
+    Timer
+    Counte
+    List items
+    📌 If something can change → use state.
+    If it will never change → NO state.
+
+
+    Does UI value change?
+        |
+        |--- NO ---> Use normal variable / constant (no state)
+        |
+        |--- YES ---> Who controls the value?
+                        |
+                        |--- Only this composable --> remember { mutableStateOf() }
+                        |
+                        |--- Parent controls ----------> Hoist state (value + onChange)
+                        |
+                        |--- Screen-level logic -----> ViewModel + StateFlow
+
+
+
+⭐ The 4 most-used patterns you must learn (only these)
+
+    1️⃣ State inside composable (UI-local)
+    var text by remember { mutableStateOf("") }
+
+
+    Use when:
+
+    Local UI behavior
+
+    Won’t survive rotation
+
+    Only that composable uses it
+
+    2️⃣ State that survives rotation
+    var text by rememberSaveable { mutableStateOf("") }
+
+
+    Use for:
+
+    Form input
+
+    Selected tab
+
+    Login fields
+
+    3️⃣ Hoisted state (parent controls)
+
+    Child:
+
+    @Composable
+    fun NameField(value: String, onValueChange: (String) -> Unit) {
+        TextField(value = value, onValueChange = onValueChange)
+    }
+
+
+    Parent:
+
+    var name by remember { mutableStateOf("") }
+    NameField(name) { name = it }
+
+
+    Use when:
+
+    Making reusable components
+
+    Clean UI architecture
+
+    4️⃣ ViewModel state (screen-level)
+
+    ViewModel:
+
+    val name = MutableStateFlow("")
+    fun updateName(newName: String) { name.value = newName }
+
+
+    Composable:
+
+    val name by vm.name.collectAsState()
+
+
+    Use when:
+
+    Full screen
+
+    Data from repo/DB
+
+    Must survive process death
+
+    App-level logic

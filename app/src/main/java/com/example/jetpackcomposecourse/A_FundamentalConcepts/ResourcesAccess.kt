@@ -1,4 +1,4 @@
-package com.example.jetpackcomposecourse.FundamentalConcepts
+package com.example.jetpackcomposecourse.A_FundamentalConcepts
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement

@@ -4,8 +4,8 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import com.example.jetpackcomposecourse.FundamentalConcepts.AccessResource
-import com.example.jetpackcomposecourse.Parameters_in_Compose.demo
+import com.example.jetpackcomposecourse.A_FundamentalConcepts.AccessResource
+import com.example.jetpackcomposecourse.B_Parameters_in_Compose.demo
 import com.example.jetpackcomposecourse.ui.theme.JetpackComposeCourseTheme
 
 class MainActivity : ComponentActivity() {

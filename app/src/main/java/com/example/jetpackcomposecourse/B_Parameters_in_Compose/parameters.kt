@@ -1,4 +1,4 @@
-package com.example.jetpackcomposecourse.Parameters_in_Compose
+package com.example.jetpackcomposecourse.B_Parameters_in_Compose
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
