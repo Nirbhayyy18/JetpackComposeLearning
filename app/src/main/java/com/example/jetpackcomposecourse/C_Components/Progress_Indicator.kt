@@ -45,21 +45,21 @@ fun CircularProgree()
         verticalArrangement = Arrangement.Center
     ) {
 
-        var loading by remember { mutableStateOf(false) }
+//        var loading by remember { mutableStateOf(false) }
+//
+//        Button(onClick = { loading = true }, enabled = !loading) {
+//            Text("Start loading")
+//        }
+//
+//        if (!loading) return
+//
+//        CircularProgressIndicator(
+//            modifier = Modifier.width(64.dp),
+//            color = MaterialTheme.colorScheme.secondary,
+//            trackColor = MaterialTheme.colorScheme.surfaceVariant,
+//        )
 
-        Button(onClick = { loading = true }, enabled = !loading) {
-            Text("Start loading")
-        }
-
-        if (!loading) return
-
-        CircularProgressIndicator(
-            modifier = Modifier.width(64.dp),
-            color = MaterialTheme.colorScheme.secondary,
-            trackColor = MaterialTheme.colorScheme.surfaceVariant,
-        )
-
-        Spacer(Modifier.height(40.dp))
+       // Spacer(Modifier.height(40.dp))
 
         // Linear Progress Indicator
         LinearProgressIndicator(
@@ -68,14 +68,73 @@ fun CircularProgree()
         trackColor = ProgressIndicatorDefaults.linearTrackColor,
         strokeCap = ProgressIndicatorDefaults.LinearStrokeCap,
         )
+        Spacer(Modifier.height(40.dp))
+
+        //Determinate Progress Indicator
+        // - Displays exactly how much progress has been made.
 
     }
+}
+
+/* Coding Challenge
+ - Create 3 Composable:
+ 1. Linear Progress Indicatior
+ 2. Button: Allow the user to increase the progress when being clicked
+ 3. Text: Displayign the Progress
+
+ * Note: All these Composable should be stateless
+*/
+
+@Composable
+fun LinearProgress(Progress: Float)
+{
+    LinearProgressIndicator(progress = Progress)
+}
+
+@Composable
+fun IncreaseProgressBtn(onclick: () -> Unit)
+{
+    Button(onClick = onclick) {
+        Text("Increase Progress")
+    }
+}
+
+@Composable
+fun ProgressText(Progress: Float)
+{
+    Text("The Progress is $Progress")
+}
+
+@Composable
+fun LinearProgressIndicatorExample()
+{
+    var progress by remember { mutableStateOf(0.0f) }
+
+    Column(
+        modifier = Modifier.fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Center
+    ) {
+        LinearProgress(progress)
+        Spacer(Modifier.height(40.dp))
+        IncreaseProgressBtn{
+            progress += 0.1f
+            if(progress > 1.0f)
+            {
+                progress = 0.0f
+            }
+        }
+        Spacer(Modifier.height(40.dp))
+        ProgressText(progress)
+    }
+
 }
 
 @Preview(showBackground = true, showSystemUi = true)
 @Composable
 fun ShowProgress()
 {
-    CircularProgree()
+    //CircularProgree()
+    LinearProgressIndicatorExample()
 }
 
