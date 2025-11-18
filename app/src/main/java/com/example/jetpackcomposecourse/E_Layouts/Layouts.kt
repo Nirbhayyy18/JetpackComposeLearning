@@ -21,7 +21,7 @@ import androidx.compose.ui.unit.sp
 fun ColumnDemo()
 {
     Column(
-        modifier = Modifier
+//        modifier = Modifier
             .fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
