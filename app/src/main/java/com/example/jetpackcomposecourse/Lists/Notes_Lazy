@@ -1,0 +1,25 @@
+LazyColumn = RecyclerView of Jetpack Compose
+
+* Syntax:
+LazyColumn {
+    item { ... }
+    items(count) { index -> ... }
+    items(list) { item -> ... }
+}
+
+* Example:
+// for single Item:
+LazyColumn {
+    item {
+        Text("Single Item")
+    }
+}
+
+// for Multiple Items:
+LazyColumn{
+    items(100){
+        index ->
+        Text("Item $index")
+    }
+}
+
