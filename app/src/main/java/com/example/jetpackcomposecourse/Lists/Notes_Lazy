@@ -23,3 +23,14 @@ LazyColumn{
     }
 }
 
+// The MOST USED version → items(list)
+
+val names = listOf("Nirbhay", "Saurabh", "Harsh")
+
+LazyColumn {
+    items(names) { name ->
+        Text(name)
+    }
+}
+
+
