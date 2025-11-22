@@ -1,0 +1,9 @@
+Setup
+ - To support Compose, use the following dependency in your app module's build.gradle.kts(Module :app) file:
+
+ dependencies {
+     val nav_version = "2.9.6"
+
+     implementation("androidx.navigation:navigation-compose:$nav_version")
+ }
+

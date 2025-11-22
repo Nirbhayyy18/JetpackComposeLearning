@@ -1,4 +1,4 @@
-package com.example.jetpackcomposecourse.Lists
+package com.example.jetpackcomposecourse.F_Lists
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.horizontalScroll
