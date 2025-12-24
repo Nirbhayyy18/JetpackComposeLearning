@@ -1,0 +1,19 @@
+Add dependency (only once per project)
+
+Create screens (@Composable functions)
+
+Create AppNavigation / NavGraph composable
+
+Create NavController
+
+Create NavHost
+
+Define all routes → map them to screens
+
+Set startDestination
+
+From a screen, call navController.navigate("route/...")
+
+To receive data, read arguments from NavBackStackEntry or via parameters
+
+In MainActivity → call setContent { AppNavigation() }

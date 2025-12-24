@@ -115,8 +115,8 @@ fun floatingbtn()
 @Composable
 fun showAppBars()
 {
-    //MyTopAppBar()
-    BottomAppBar()
+    MyTopAppBar()
+    //BottomAppBar()
     //floatingbtn()
 
 }

@@ -50,7 +50,7 @@ fun MyScaffoldScreen() {
     }
 }
 
-@Preview(showSystemUi = true, device = Devices.NEXUS_10)
+@Preview(showSystemUi = true, showBackground = true)
 @Composable
 fun showScaffold()
 {
