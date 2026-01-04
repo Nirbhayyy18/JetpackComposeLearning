@@ -11,10 +11,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 
 @Composable
 fun SettingsScreen(
-    onNavigateToHome: () -> Unit
+    navController: NavController
 )
 {
     Column(modifier = Modifier.fillMaxSize(),
@@ -24,7 +25,7 @@ fun SettingsScreen(
 
         Spacer(Modifier.height(20.dp))
 
-        Button(onClick = { onNavigateToHome() }) {
+        Button(onClick = { navController.navigate("Home") }) {
             Text(text = "Go to Home Screen")
         }
     }

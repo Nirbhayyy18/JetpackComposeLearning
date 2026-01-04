@@ -1,0 +1,101 @@
+🧱 PART 1 — FOUNDATION: How ConstraintLayout Thinks
+❓What problem does it solve?
+
+Column/Row:
+
+This then that then that
+
+
+ConstraintLayout:
+
+This is related to that.
+That is related to parent.
+Everything adapts.
+
+
+Instead of stacking, you create relationships.
+
+🧩 PART 2 — Core Syntax (must memorize)
+1️⃣ Create layout + references
+ConstraintLayout(
+    modifier = Modifier.fillMaxSize()
+) {
+    val (A, B, C) = createRefs()
+}
+
+
+Each variable (A, B, C) represents one UI element.
+
+2️⃣ Attach element with constraints
+Text(
+    "Hello",
+    modifier = Modifier.constrainAs(A) {
+        top.linkTo(parent.top)
+        start.linkTo(parent.start)
+    }
+)
+
+
+Rule:
+Every constrained view must connect at least one horizontal and one vertical constraint.
+
+
+📌 Constraint Rules Cheat Sheet
+You want	Use
+    Center horizontally	centerHorizontallyTo(parent)
+    Center vertically	centerVerticallyTo(parent)
+    Under another	top.linkTo(other.bottom)
+    Left of another	end.linkTo(other.start)
+    Right of another	start.linkTo(other.end)
+    Pin bottom	bottom.linkTo(parent.bottom)
+    Pin top	top.linkTo(parent.top)
+
+
+ConstraintLayout:
+1. ConstraintLayout { val (a,b,c) = createRefs() }
+2. Each UI element → Modifier.constrainAs(ref) { constraints }
+3. Must give at least 1 vertical and 1 horizontal constraint.
+4. Use parent and other refs.
+5. Used for complex layouts.
+
+
+🧭 1. GUIDELINES — “Invisible Rulers”
+🧠 What is a Guideline?
+
+A Guideline is an invisible line used for positioning elements.
+
+Think of it like drawing a pencil line on your notebook and aligning everything with it.
+
+🧩 Why use Guidelines?
+
+So your UI:
+
+scales on different screen sizes
+
+stays aligned
+
+looks consistent
+
+🧪 Example — 30% from left
+ConstraintLayout(modifier = Modifier.fillMaxSize()) {
+
+    val guide = createGuidelineFromStart(0.3f)
+    val text = createRef()
+
+    Text(
+        "Hello",
+        modifier = Modifier.constrainAs(text) {
+            start.linkTo(guide)
+            top.linkTo(parent.top, 40.dp)
+        }
+    )
+}
+
+
+🧠 Now the text will always start at 30% of screen width.
+
+📌 Types of Guidelines
+createGuidelineFromStart(0.3f)
+createGuidelineFromEnd(0.2f)
+createGuidelineFromTop(100.dp)
+createGuidelineFromBottom(50.dp)

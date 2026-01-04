@@ -11,14 +11,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 
 @Composable
 fun ProfileScreen(
-    id: Int,
-    showDetails: Boolean,
-
-    onNavigateToSettings: () -> Unit,
-    onNavigateToHome: () -> Unit
+    navController: NavController, id: Int?, showDetails: Boolean?
 )
 {
     Column(modifier = Modifier.fillMaxSize(),
@@ -32,7 +29,7 @@ fun ProfileScreen(
         Spacer(Modifier.height(20.dp))
         Text("Profile Details: $showDetails")
         Spacer(Modifier.height(20.dp))
-        Button(onClick = {onNavigateToSettings()}) {
+        Button(onClick = {navController.navigate("Setting")}) {
             Text(text = "Go to Settings")
         }
     }

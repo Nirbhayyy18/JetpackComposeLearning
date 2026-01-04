@@ -11,24 +11,27 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 
 @Composable
 fun HomeScreen(
-    onNavigateToProfile: (Int, Boolean) -> Unit,
-    onNavigateToSettings: () -> Unit
+    navController: NavController
 )
 {
     Column (modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center
         ) {
-        Button(onClick = {onNavigateToProfile(18,true)}) {
+
+        var ID = 121;
+        var showDetails = true;
+        Button(onClick = {navController.navigate("Profile/$ID/$showDetails")}) {
             Text("Profile")
         }
 
         Spacer(Modifier.height(20.dp))
 
-        Button(onClick = {onNavigateToSettings()}) {
+        Button(onClick = {navController.navigate("Setting")}) {
             Text("Settings")
         }
     }
